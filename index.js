@@ -7,14 +7,10 @@ const app = express()
 require('dotenv').config();
 
 app.set('port', (process.env.PORT || 3000))
-
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}))
-
-// parse application/json
 app.use(bodyParser.json())
 
-// index
+// index route
 app.get('/', function (req, res) {
 	res.send('hello world i am a secret bot')
 })
@@ -29,10 +25,7 @@ app.get('/webhook/', function (req, res) {
 let Wit = require('node-wit').Wit;
 let log = require('node-wit').log;
 
-const accessToken = (() => {
-  var accessToken = 'QDEMGPI7E74DDCOUG7SG6CCHIBTVY5JI';
-  return accessToken;
-})();
+const accessToken = process.env.WIT_TOKEN;
 
 const firstEntityValue = (entities, entity) => {
   const val = entities && entities[entity] &&
@@ -164,10 +157,7 @@ app.post('/webhook/', function (req, res) {
 	res.sendStatus(200)
 })
 
-
-// recommended to inject access tokens as environmental variables, e.g.
-// const token = process.env.PAGE_ACCESS_TOKEN
-const token = "EAAFNhaSRphcBALmjXImjXyIbZB7vTNJ6g9ZBSiZAefwDzqNzrCALGOhsPz82BFYK27BrDPMsKnZCkNmAl2is9oZBEbe9jpaVN9582ZCsZAc6Vy1pjiKKpRwgvw13YtTQhiB9mjV7fIidXZCBQqS4otqbnYoE0QRXSNBwNTpNZAQHPrAZDZD"
+const token = process.env.PAGE_ACCESS_TOKEN
 
 function sendTextMessage(sender, text) {
 	let messageData = { text:text }
