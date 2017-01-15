@@ -3,8 +3,9 @@
 
 ####Steps:
 
+0. Download/clone the repo
 1. Rename .env.text to .env
-2. `npm install`
+2. `npm install` (inside the folder)
 3. Add your token keys to the .env variables
 4. Check if the basicMessengerWIT.js is working for your messenger bot. This should be your starting point. 
 5. Build on top of it. 
