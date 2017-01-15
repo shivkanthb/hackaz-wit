@@ -59,38 +59,6 @@ const actions = {
       return;
     }
   },
-  	getForecast({context,entities}) {
-  		console.log("context is :"+ JSON.stringify(context));
-  		var location = firstEntityValue(entities,"location");
-
-  		if(location)
-  		{
-  			console.log("Location yay");
-  			context.forecast = "Sunny in "+ location;
-  			delete context.missingLocation;
-  		}
-  		else
-  		{
-  			context.missingLocation = true;
-  			delete context.forecast;
-  		}
-  		return context;
-  	},
-  	greet({context,entities}) {
-  		console.log("context is :"+ JSON.stringify(context));
-  		var greet_value = firstEntityValue(entities,"greeting");
-
-  		if(greet_value=="hello")
-  		{
-  			context.greetingreply = "Hello Human";
-  			delete context.missingLocation;
-  		}
-  		else
-  		{
-  			context.greetingreply = "I dont like humans";
-  		}
-  		return context;
-  	},
 
 }
 
@@ -122,18 +90,7 @@ app.post('/webhook/', function (req, res) {
 		const sessionId = findOrCreateSession(sender);
 		if (event.message && event.message.text) {
 			let text = event.message.text;
-
-			wit.runActions(
-				sessionId,
-				text,
-				sessions[sessionId].context)
-			.then((context) => {
-			  
-			})
-			.catch((e) => {
-			  console.log('Oops! Got an error: ' + e);
-			});
-			// sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
