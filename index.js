@@ -73,60 +73,30 @@ const actions = {
     }
   },
     getForecast({context, entities}) {
-
-    return new Promise(function(resolve, reject) {
-    	var location = firstEntityValue(entities,'location');
-
-    	if(location)
-    	{
-    		f.getForecastFromAPI(location, function(err, summary) {
-    			if(!err)
-    			{
-    				context.forecast = summary + " in "+location;
-    				delete context.missingLocation;
-    				context.done = true;
-    				// return resolve(context);
-    			}
-    		})
-    	}
-    	else
-    	{
-    		context.missingLocation = true;
-    		delete context.forecast;
-    	}
-    	resolve(context);
-    });
-  //     console.log((JSON.stringify(context)));
-  //     context = {};
-  //     var location = firstEntityValue(entities, 'location');
-  //     if (location) {
-  //     	console.log("LOCATION IS PRESENT");
-  // //       context.forecast = 'sunny in ' + location; // we should call a weather API here
-
-  // //       delete context.missingLocation;
-		// // context.done = true;
-		// // return context;
-		// return new Promise(function(resolve, reject) {
-	 //        f.getForecastFromAPI(location, function(err, summary) {
-	 //        	if(err) reject(err);
-	        	
-  //       		console.log("New forecasr");
-  //       		context.forecast = summary+" "+location;
-  //       		delete context.missingLocation;
-  //       		context.done = true;
-  //       		console.log("CONTEXT BEING SENT "+JSON.stringify(context));
-  //       		resolve(context);
-        	
-	 //        });
-		// });
-        
-  //     } else {
-  //       context.missingLocation = true;
-  //       delete context.forecast;
-  //       console.log("CONTEXT BEING SENT "+JSON.stringify(context));
-  //       return context;
-  //     }
-      // return context;
+      console.log((JSON.stringify(context)));
+      context = {};
+      var location = firstEntityValue(entities, 'location');
+      if (location) {
+    		return new Promise(function(resolve, reject) {
+    	        f.getForecastFromAPI(location, function(err, summary) {
+    	        	if(err) reject(err);
+    	        	
+            		console.log("New forecasr");
+            		context.forecast = summary+" "+location;
+            		delete context.missingLocation;
+            		context.done = true;
+            		console.log("CONTEXT BEING SENT "+JSON.stringify(context));
+            		resolve(context);
+            	
+    	        });
+    		});        
+      } else {
+        context.missingLocation = true;
+        delete context.forecast;
+        console.log("CONTEXT BEING SENT "+JSON.stringify(context));
+        return context;
+      }
+      return context;
     },
     greet({context, entities}) {
       console.log((JSON.stringify(context)));

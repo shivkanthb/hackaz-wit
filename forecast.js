@@ -1,9 +1,6 @@
 var request = require('request');
 
-
 // var user_input = 'Tucson';
-
-
 
 var api_key = 'AIzaSyDYxorcyOCRYaQCyTzMHgnYUjIAZEdTw7w';
 var base_url = 'https://maps.googleapis.com/maps/api/geocode/json';
@@ -40,7 +37,6 @@ var getLatLongFromLocation = function(user_input, callback) {
 };
 
 var getForecastFromAPI = function(location, cb) {
-	
 	var darksky_key = "679dabfb8a1db5a2d53599f4e10db597";
 	getLatLongFromLocation(location, function(err, latlng) {
 		if(err)
@@ -61,22 +57,6 @@ var getForecastFromAPI = function(location, cb) {
 			}
 		});
 	});
-	
-	
 };
 
 module.exports.getForecastFromAPI = getForecastFromAPI;
-
-
-// getLatLongFromLocation(user_input, function(err, result) {
-// 	if(Object.keys(result).length === 0)
-// 		console.log("Im sorry I did not understand that. Provide a better input.");
-// 	else
-// 		console.log(result);
-// });
-// var darksky_key = "679dabfb8a1db5a2d53599f4e10db597";
-// getForecastFromAPI(darksky_key, "33.4483771,-112.0740373");
-
-// getForecastFromAPI(user_input, function(err, summary) {
-// 	console.log(summary);
-// });
